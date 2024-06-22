@@ -2,7 +2,7 @@ from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.exporter.jaeger.thrift import JaegerExporter
 from opentelemetry.sdk.resources import SERVICE_NAME, Resource
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
-from config import AGENT, AGENT_HOST_NAME, AGENT_PORT
+from config import AGENT, AGENT_HOST_NAME, AGENT_PORT, AGENT_COLLECTOR_ENDPOINT
 from fastapi.middleware.cors import CORSMiddleware
 from opentelemetry.sdk.trace import TracerProvider
 from contextlib import asynccontextmanager
@@ -19,8 +19,10 @@ tracer_provider = trace.get_tracer_provider()
 
 # Configure Jaeger exporter
 jaeger_exporter = JaegerExporter(
-    agent_host_name=AGENT_HOST_NAME,
-    agent_port=AGENT_PORT,
+    # agent_host_name=AGENT_HOST_NAME,
+    # agent_port=AGENT_PORT,
+    # --- OR ---
+    collector_endpoint=AGENT_COLLECTOR_ENDPOINT
 )
 
 
